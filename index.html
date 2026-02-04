@@ -12,187 +12,213 @@
             --ba-light-blue: #e6f7ff;
             --ba-dark-blue: #123456;
             --bg-white: #f4f7f9;
-            --glass: rgba(255, 255, 255, 0.85);
+            --glass: rgba(255, 255, 255, 0.8);
             --schale-gray: #5b6d81;
             --accent-orange: #ff9d00;
-            --ai-pink: #ff7eb6;
+            --ai-purple: #a855f7;
         }
 
-        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
             background-color: var(--bg-white);
             background-image: 
-                radial-gradient(var(--ba-light-blue) 1px, transparent 1px);
-            background-size: 30px 30px;
+                linear-gradient(135deg, #ffffff 25%, transparent 25%), 
+                linear-gradient(225deg, #ffffff 25%, transparent 25%), 
+                linear-gradient(45deg, #ffffff 25%, transparent 25%), 
+                linear-gradient(315deg, #ffffff 25%, #f4f7f9 25%);
+            background-position: 40px 0, 40px 0, 0 0, 0 0;
+            background-size: 80px 80px;
+            background-repeat: repeat;
             color: var(--schale-gray);
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            padding: 10px;
+            padding: 20px 0;
         }
 
         .app-container {
-            width: 100%;
-            max-width: 420px;
+            width: 95%;
+            max-width: 450px;
             background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid #fff;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            backdrop-filter: blur(15px);
+            border: 2px solid #fff;
+            border-radius: 5px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 0 5px rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 2px solid var(--ba-blue);
-            padding-bottom: 8px;
-            margin-bottom: 5px;
+            align-items: center;
+            border-bottom: 3px solid var(--ba-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .header-title {
             font-family: 'Exo 2', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-style: italic;
             color: var(--ba-blue);
-            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .system-time {
+        .system-status {
             font-size: 10px;
             color: var(--ba-blue);
             text-align: right;
-            font-family: monospace;
+            line-height: 1.2;
         }
 
-        /* Birthday AI Section */
-        .birthday-section {
-            background: linear-gradient(90deg, rgba(255, 126, 182, 0.1), transparent);
-            border: 1px solid rgba(255, 126, 182, 0.3);
-            border-radius: 8px;
-            padding: 10px;
-            position: relative;
+        /* AI Advisor Section */
+        .ai-section {
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px dashed var(--ai-purple);
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 15px;
         }
 
-        .birthday-title {
-            font-size: 10px;
+        .ai-title {
+            font-size: 11px;
             font-weight: bold;
-            color: var(--ai-pink);
+            color: var(--ai-purple);
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
-            gap: 4px;
-            margin-bottom: 4px;
+            gap: 5px;
         }
 
-        .birthday-content {
+        .ai-content {
             font-size: 12px;
             line-height: 1.4;
-            color: #be185d;
+            color: #6b21a8;
         }
 
-        /* Timer Grid */
-        .timer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
+        /* Timer Cards */
         .timer-card {
             background: white;
-            border-radius: 6px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 2px 2px 0px var(--ba-blue);
             border: 1px solid #d1dee7;
-            padding: 10px;
-            box-shadow: 2px 2px 0px rgba(0, 187, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 12px;
         }
 
-        .area-tag {
-            font-size: 9px;
-            font-weight: bold;
-            color: white;
-            background: var(--ba-blue);
-            padding: 1px 6px;
-            align-self: flex-start;
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 5px;
         }
 
-        .invitation .area-tag { background: var(--accent-orange); }
+        .area-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            background: var(--ba-blue);
+            padding: 2px 10px;
+            transform: skewX(-15deg);
+        }
+
+        .area-label span {
+            display: inline-block;
+            transform: skewX(15deg);
+        }
 
         .time-display {
             font-family: 'Exo 2', sans-serif;
-            font-size: 1.8rem;
+            font-size: 2.4rem;
             color: var(--ba-dark-blue);
+            text-align: center;
             margin: 5px 0;
             font-variant-numeric: tabular-nums;
         }
 
-        .invitation .time-display { color: var(--accent-orange); }
-
         .status-badge {
-            font-size: 10px;
+            text-align: center;
+            font-size: 11px;
             font-weight: bold;
             color: var(--ba-blue);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
-        .invitation .status-badge { color: var(--accent-orange); }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
 
         .btn {
-            width: 100%;
+            flex: 1;
             border: none;
-            padding: 8px;
+            padding: 10px;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
-            border-radius: 4px;
             transition: 0.2s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
         }
 
-        .btn-main { background: var(--ba-blue); color: white; margin-bottom: 4px; }
-        .btn-main:active { transform: scale(0.95); }
-        .btn-sub { background: #f1f5f9; color: #94a3b8; padding: 4px; font-size: 9px; }
-        .btn-invite { background: var(--accent-orange); color: white; }
+        .btn-main { background: var(--ba-blue); color: white; }
+        .btn-main:active { transform: translateY(1px); }
+        .btn-sub { background: #f1f5f9; color: var(--schale-gray); }
+        
+        .invitation { border-bottom: 4px solid var(--accent-orange); box-shadow: 2px 2px 0px var(--accent-orange); }
+        .invitation .area-label { background: var(--accent-orange); }
+        .invitation .time-display { color: var(--accent-orange); }
+        .invitation .status-badge { color: var(--accent-orange); }
 
-        .btn:disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
-
-        /* Splash */
         #splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: white; display: flex; justify-content: center; align-items: center;
-            z-index: 1000; transition: 0.5s;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: 0.5s;
         }
 
         #notice-bar {
-            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
-            background: var(--ba-dark-blue); color: white; padding: 8px 20px;
-            border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 1001;
+            position: fixed;
+            top: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--ba-dark-blue); color: white;
+            padding: 10px 30px; border-radius: 50px;
+            font-size: 14px; font-weight: bold; z-index: 1000;
             display: none;
         }
 
-        .loading-dots:after {
-            content: '.';
-            animation: dots 1.5s steps(5, end) infinite;
+        .loading-spinner {
+            display: inline-block;
+            width: 12px; height: 12px;
+            border: 2px solid rgba(168, 85, 247, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--ai-purple);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 5px;
         }
-        @keyframes dots { 0%, 20% { color: rgba(0,0,0,0); text-shadow: .2em 0 0 rgba(0,0,0,0), .4em 0 0 rgba(0,0,0,0); } 40% { color: currentColor; text-shadow: .2em 0 0 rgba(0,0,0,0), .4em 0 0 rgba(0,0,0,0); } 60% { text-shadow: .2em 0 0 currentColor, .4em 0 0 rgba(0,0,0,0); } 80%, 100% { text-shadow: .2em 0 0 currentColor, .4em 0 0 currentColor; } }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
 <div id="splash" onclick="initApp()">
     <div style="text-align: center;">
-        <div style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; color: var(--ba-blue);">SCHALE SYSTEM</div>
-        <div style="font-size: 9px; letter-spacing: 2px; color: var(--schale-gray);">TAP TO ACCESS</div>
+        <div style="font-family: 'Exo 2', sans-serif; font-size: 2rem; color: var(--ba-blue);">SCHALE</div>
+        <div style="font-size: 10px; letter-spacing: 2px; color: var(--schale-gray);">TOUCH TO BOOT SYSTEM</div>
     </div>
 </div>
 
@@ -200,62 +226,77 @@
 
 <div class="app-container">
     <div class="header">
-        <div class="header-title">CAFE MANAGER</div>
-        <div class="system-time">
-            <span id="current-date">2024.01.01</span><br>
-            RESET: 04/16
+        <div class="header-title">Cafe Manager</div>
+        <div class="system-status">
+            STATUS: ONLINE<br>
+            <span id="current-date">0000.00.00</span>
         </div>
     </div>
 
-    <!-- Birthday AI Section -->
-    <div class="birthday-section">
-        <div class="birthday-title">🎂 本日の誕生日生徒データ</div>
-        <div id="birthday-info" class="birthday-content">
-            <span class="loading-dots">データ照合中</span>
-        </div>
+    <!-- AI Advisor Section -->
+    <div class="ai-section">
+        <div class="ai-title">✨ AI戦術アドバイザー</div>
+        <div id="ai-response" class="ai-content">システム起動中...</div>
     </div>
 
-    <!-- Cafe Timer Grid -->
-    <div class="timer-grid">
-        <!-- Area 01 -->
-        <div class="timer-card" id="card-timer1">
-            <div class="area-tag">AREA 01</div>
-            <div class="time-display" id="timer1">03:00:00</div>
-            <div class="status-badge" id="status-timer1">READY</div>
-            <button class="btn btn-main" onclick="startTimer('timer1', 3)">TOUCH</button>
+    <!-- Area 01 -->
+    <div class="timer-card" id="card-timer1">
+        <div class="label-row">
+            <div class="area-label"><span>AREA 01</span></div>
+            <div style="font-size: 9px; color: #aab6c3;">RESET: 04:00 / 16:00</div>
+        </div>
+        <div class="time-display" id="timer1">03:00:00</div>
+        <div class="status-badge" id="status-timer1">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('timer1', 3)">EXECUTE</button>
             <button class="btn btn-sub" onclick="resetTimer('timer1')">CLEAR</button>
         </div>
+    </div>
 
-        <!-- Area 02 -->
-        <div class="timer-card" id="card-timer2">
-            <div class="area-tag">AREA 02</div>
-            <div class="time-display" id="timer2">03:00:00</div>
-            <div class="status-badge" id="status-timer2">READY</div>
-            <button class="btn btn-main" onclick="startTimer('timer2', 3)">TOUCH</button>
+    <!-- Area 02 -->
+    <div class="timer-card" id="card-timer2">
+        <div class="label-row">
+            <div class="area-label"><span>AREA 02</span></div>
+            <div style="font-size: 9px; color: #aab6c3;">RESET: 04:00 / 16:00</div>
+        </div>
+        <div class="time-display" id="timer2">03:00:00</div>
+        <div class="status-badge" id="status-timer2">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('timer2', 3)">EXECUTE</button>
             <button class="btn btn-sub" onclick="resetTimer('timer2')">CLEAR</button>
         </div>
+    </div>
 
-        <!-- Invitation 01 -->
-        <div class="timer-card invitation" id="card-inv1">
-            <div class="area-tag">TICKET 01</div>
-            <div class="time-display" id="inv1">20:00:00</div>
-            <div class="status-badge" id="status-inv1">READY</div>
-            <button class="btn btn-invite btn-main" onclick="startTimer('inv1', 20)">INVITE</button>
+    <!-- Ticket 01 -->
+    <div class="timer-card invitation" id="card-inv1">
+        <div class="label-row">
+            <div class="area-label"><span>TICKET 01</span></div>
+            <div style="font-size: 9px; color: #aab6c3;">COOLDOWN: 20H</div>
+        </div>
+        <div class="time-display" id="inv1">20:00:00</div>
+        <div class="status-badge" id="status-inv1">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('inv1', 20)">INVITE</button>
             <button class="btn btn-sub" onclick="resetTimer('inv1')">CLEAR</button>
         </div>
+    </div>
 
-        <!-- Invitation 02 -->
-        <div class="timer-card invitation" id="card-inv2">
-            <div class="area-tag">TICKET 02</div>
-            <div class="time-display" id="inv2">20:00:00</div>
-            <div class="status-badge" id="status-inv2">READY</div>
-            <button class="btn btn-invite btn-main" onclick="startTimer('inv2', 20)">INVITE</button>
+    <!-- Ticket 02 -->
+    <div class="timer-card invitation" id="card-inv2">
+        <div class="label-row">
+            <div class="area-label"><span>TICKET 02</span></div>
+            <div style="font-size: 9px; color: #aab6c3;">COOLDOWN: 20H</div>
+        </div>
+        <div class="time-display" id="inv2">20:00:00</div>
+        <div class="status-badge" id="status-inv2">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('inv2', 20)">INVITE</button>
             <button class="btn btn-sub" onclick="resetTimer('inv2')">CLEAR</button>
         </div>
     </div>
 
-    <div style="text-align: center; font-size: 8px; color: #cbd5e1; margin-top: 5px;">
-        CONFIDENTIAL - SCHALE ORGANIZATION CAFE UNIT
+    <div style="text-align: center; font-size: 9px; color: #aab6c3; margin-top: 10px;">
+        CONFIDENTIAL - SCHALE ORGANIZATION
     </div>
 </div>
 
@@ -267,8 +308,8 @@
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         document.getElementById('splash').style.opacity = '0';
         setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 500);
-        playBeep(880, 0.05, 0.15);
-        fetchBirthdayInfo();
+        playBeep(880, 0.05, 0.1);
+        fetchAiAdvice();
     }
 
     async function callGemini(prompt, systemPrompt) {
@@ -294,19 +335,19 @@
         }
     }
 
-    async function fetchBirthdayInfo() {
-        const infoBox = document.getElementById('birthday-info');
-        const now = new Date();
-        const dateStr = `${now.getMonth() + 1}月${now.getDate()}日`;
+    async function fetchAiAdvice() {
+        const aiBox = document.getElementById('ai-response');
+        aiBox.innerHTML = '<span class="loading-spinner"></span> 戦術分析中...';
         
-        const systemPrompt = "あなたはシャーレのAI秘書です。指定された日付が誕生日の『ブルーアーカイブ』の生徒を教え、先生にお祝いを促してください。該当者がいない場合は、先生を労う言葉をかけてください。回答は短く2文以内で。";
-        const prompt = `今日（${dateStr}）が誕生日の生徒は誰ですか？`;
+        const now = new Date();
+        const systemPrompt = "あなたはシャーレのAI秘書です。先生に今日の短い挨拶と、カフェ管理への一言アドバイスを送ってください。短く2文以内で。";
+        const prompt = "先生に挨拶と、今日のカフェ運用の応援をお願いします。";
 
         try {
             const res = await callGemini(prompt, systemPrompt);
-            infoBox.innerText = res || "今日の誕生日の生徒データは見当たりませんでした。先生、今日も一日頑張りましょう！";
+            aiBox.innerText = res || "先生、お疲れ様です！今日もカフェの管理を頑張りましょう！";
         } catch (e) {
-            infoBox.innerText = "データ取得に失敗。通信環境を確認してください。";
+            aiBox.innerText = "通信エラー：戦術データの受信に失敗しました。";
         }
     }
 
@@ -357,7 +398,7 @@
             const status = document.getElementById('status-' + id);
             const btn = document.querySelector(`#card-${id} .btn-main`);
             
-            // 4:00/16:00 Reset Logic (Areas only)
+            // Reset logic
             if (id.startsWith('timer') && savedEnd) {
                 const lastCheck = localStorage.getItem(id + '_rck') || 0;
                 const nowT = now.getTime();
@@ -374,7 +415,7 @@
 
             if (!savedEnd) {
                 display.innerText = (id.startsWith('inv')) ? "20:00:00" : "03:00:00";
-                display.style.opacity = "0.2";
+                display.style.opacity = "0.3";
                 status.innerText = "READY";
                 btn.disabled = false;
                 return;
