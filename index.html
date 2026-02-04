@@ -12,240 +12,187 @@
             --ba-light-blue: #e6f7ff;
             --ba-dark-blue: #123456;
             --bg-white: #f4f7f9;
-            --glass: rgba(255, 255, 255, 0.8);
+            --glass: rgba(255, 255, 255, 0.85);
             --schale-gray: #5b6d81;
             --accent-orange: #ff9d00;
-            --ai-purple: #a855f7;
+            --ai-pink: #ff7eb6;
         }
 
-        * {
-            box-sizing: border-box;
-            user-select: none;
-        }
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-white);
             background-image: 
-                linear-gradient(135deg, #ffffff 25%, transparent 25%), 
-                linear-gradient(225deg, #ffffff 25%, transparent 25%), 
-                linear-gradient(45deg, #ffffff 25%, transparent 25%), 
-                linear-gradient(315deg, #ffffff 25%, #f4f7f9 25%);
-            background-position: 40px 0, 40px 0, 0 0, 0 0;
-            background-size: 80px 80px;
-            background-repeat: repeat;
+                radial-gradient(var(--ba-light-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
             color: var(--schale-gray);
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            padding: 20px 0;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: -10%;
-            right: -10%;
-            width: 40%;
-            height: 40%;
-            background: radial-gradient(circle, rgba(0, 187, 255, 0.05) 0%, transparent 70%);
-            z-index: -1;
+            padding: 10px;
         }
 
         .app-container {
-            width: 95%;
-            max-width: 450px;
+            width: 100%;
+            max-width: 420px;
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            border: 2px solid #fff;
-            border-radius: 5px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 0 5px rgba(255, 255, 255, 0.5);
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid var(--ba-blue);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--ba-blue);
+            padding-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .header-title {
             font-family: 'Exo 2', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-style: italic;
             color: var(--ba-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: bold;
         }
 
-        .system-status {
+        .system-time {
             font-size: 10px;
             color: var(--ba-blue);
             text-align: right;
-            line-height: 1.2;
+            font-family: monospace;
         }
 
-        /* AI Section */
-        .ai-section {
-            background: rgba(168, 85, 247, 0.05);
-            border: 1px dashed var(--ai-purple);
-            border-radius: 4px;
-            padding: 12px;
-            margin-bottom: 20px;
+        /* Birthday AI Section */
+        .birthday-section {
+            background: linear-gradient(90deg, rgba(255, 126, 182, 0.1), transparent);
+            border: 1px solid rgba(255, 126, 182, 0.3);
+            border-radius: 8px;
+            padding: 10px;
             position: relative;
         }
 
-        .ai-title {
-            font-size: 11px;
+        .birthday-title {
+            font-size: 10px;
             font-weight: bold;
-            color: var(--ai-purple);
-            margin-bottom: 5px;
+            color: var(--ai-pink);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            margin-bottom: 4px;
         }
 
-        .ai-content {
+        .birthday-content {
             font-size: 12px;
             line-height: 1.4;
-            color: #6b21a8;
+            color: #be185d;
         }
 
-        /* Timer Cards */
-        .timer-card {
-            background: white;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            position: relative;
-            box-shadow: 2px 2px 0px var(--ba-blue);
-            border: 1px solid #d1dee7;
-            padding: 15px;
-        }
-
-        .timer-card::after {
-            content: "";
-            position: absolute;
-            top: 0; right: 0;
-            width: 30px; height: 30px;
-            background: linear-gradient(225deg, var(--ba-blue) 45%, transparent 50%);
-            opacity: 0.1;
-        }
-
-        .label-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .area-label {
-            font-size: 11px;
-            font-weight: bold;
-            color: white;
-            background: var(--ba-blue);
-            padding: 2px 10px;
-            transform: skewX(-15deg);
-        }
-
-        .area-label span {
-            display: inline-block;
-            transform: skewX(15deg);
-        }
-
-        .time-display {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 2.8rem;
-            color: var(--ba-dark-blue);
-            text-align: center;
-            margin: 10px 0;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .status-badge {
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--ba-blue);
-            height: 18px;
-            margin-bottom: 10px;
-        }
-
-        .button-group {
-            display: flex;
+        /* Timer Grid */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .btn {
-            flex: 1;
-            border: none;
-            padding: 12px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+        .timer-card {
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #d1dee7;
+            padding: 10px;
+            box-shadow: 2px 2px 0px rgba(0, 187, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .btn-main { background: var(--ba-blue); color: white; }
-        .btn-main:hover { background: var(--ba-dark-blue); transform: translateY(-2px); }
-        .btn-sub { background: #eef2f5; color: var(--schale-gray); }
-        .btn-ai { background: var(--ai-purple); color: white; margin-top: 10px; clip-path: none; border-radius: 4px; }
-        .btn-ai:hover { opacity: 0.9; }
+        .area-tag {
+            font-size: 9px;
+            font-weight: bold;
+            color: white;
+            background: var(--ba-blue);
+            padding: 1px 6px;
+            align-self: flex-start;
+            margin-bottom: 5px;
+        }
 
-        .btn:disabled { background: #d1dee7; opacity: 0.6; cursor: not-allowed; }
+        .invitation .area-tag { background: var(--accent-orange); }
 
-        .invitation { border-bottom: 4px solid var(--accent-orange); box-shadow: 2px 2px 0px var(--accent-orange); }
-        .invitation .area-label { background: var(--accent-orange); }
+        .time-display {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
+            color: var(--ba-dark-blue);
+            margin: 5px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
         .invitation .time-display { color: var(--accent-orange); }
 
+        .status-badge {
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--ba-blue);
+            margin-bottom: 8px;
+        }
+
+        .invitation .status-badge { color: var(--accent-orange); }
+
+        .btn {
+            width: 100%;
+            border: none;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        .btn-main { background: var(--ba-blue); color: white; margin-bottom: 4px; }
+        .btn-main:active { transform: scale(0.95); }
+        .btn-sub { background: #f1f5f9; color: #94a3b8; padding: 4px; font-size: 9px; }
+        .btn-invite { background: var(--accent-orange); color: white; }
+
+        .btn:disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
+
+        /* Splash */
         #splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            transition: 0.5s;
+            background: white; display: flex; justify-content: center; align-items: center;
+            z-index: 1000; transition: 0.5s;
         }
 
         #notice-bar {
-            position: fixed;
-            top: 20px; left: 50%; transform: translateX(-50%);
-            background: var(--ba-dark-blue); color: white;
-            padding: 10px 30px; border-radius: 50px;
-            font-size: 14px; font-weight: bold; z-index: 1000;
-            display: none; animation: slideDown 0.3s forwards;
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            background: var(--ba-dark-blue); color: white; padding: 8px 20px;
+            border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 1001;
+            display: none;
         }
 
-        @keyframes slideDown { from { top: -50px; } to { top: 20px; } }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 12px; height: 12px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 5px;
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s steps(5, end) infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes dots { 0%, 20% { color: rgba(0,0,0,0); text-shadow: .2em 0 0 rgba(0,0,0,0), .4em 0 0 rgba(0,0,0,0); } 40% { color: currentColor; text-shadow: .2em 0 0 rgba(0,0,0,0), .4em 0 0 rgba(0,0,0,0); } 60% { text-shadow: .2em 0 0 currentColor, .4em 0 0 rgba(0,0,0,0); } 80%, 100% { text-shadow: .2em 0 0 currentColor, .4em 0 0 currentColor; } }
     </style>
 </head>
 <body>
 
 <div id="splash" onclick="initApp()">
     <div style="text-align: center;">
-        <div style="font-family: 'Exo 2', sans-serif; font-size: 2rem; color: var(--ba-blue);">SCHALE</div>
-        <div style="font-size: 10px; letter-spacing: 2px; color: var(--schale-gray);">TOUCH TO BOOT SYSTEM</div>
+        <div style="font-family: 'Exo 2', sans-serif; font-size: 1.5rem; color: var(--ba-blue);">SCHALE SYSTEM</div>
+        <div style="font-size: 9px; letter-spacing: 2px; color: var(--schale-gray);">TAP TO ACCESS</div>
     </div>
 </div>
 
@@ -253,80 +200,75 @@
 
 <div class="app-container">
     <div class="header">
-        <div class="header-title">Cafe Touch Manager</div>
-        <div class="system-status">
-            STATUS: ONLINE<br>
-            <span id="current-date">0000.00.00</span>
+        <div class="header-title">CAFE MANAGER</div>
+        <div class="system-time">
+            <span id="current-date">2024.01.01</span><br>
+            RESET: 04/16
         </div>
     </div>
 
-    <!-- AI Advisor -->
-    <div class="ai-section">
-        <div class="ai-title">✨ AI戦術アドバイザー</div>
-        <div id="ai-response" class="ai-content">システム待機中... 今日の戦術を分析しましょう。</div>
-        <button class="btn btn-ai" id="btn-ask-ai" onclick="askAiAdvice()">
-            ✨ 戦術プランを生成
-        </button>
+    <!-- Birthday AI Section -->
+    <div class="birthday-section">
+        <div class="birthday-title">🎂 本日の誕生日生徒データ</div>
+        <div id="birthday-info" class="birthday-content">
+            <span class="loading-dots">データ照合中</span>
+        </div>
     </div>
 
-    <!-- Area 01 -->
-    <div class="timer-card" id="card-timer1">
-        <div class="label-row">
-            <div class="area-label"><span>AREA 01</span></div>
-            <div style="font-size: 10px; color: #aab6c3;">RESET: 04:00 / 16:00</div>
-        </div>
-        <div class="time-display" id="timer1">03:00:00</div>
-        <div class="status-badge" id="status-timer1">READY</div>
-        <div class="button-group">
-            <button class="btn btn-main" onclick="startTimer('timer1', 3)">EXECUTE</button>
+    <!-- Cafe Timer Grid -->
+    <div class="timer-grid">
+        <!-- Area 01 -->
+        <div class="timer-card" id="card-timer1">
+            <div class="area-tag">AREA 01</div>
+            <div class="time-display" id="timer1">03:00:00</div>
+            <div class="status-badge" id="status-timer1">READY</div>
+            <button class="btn btn-main" onclick="startTimer('timer1', 3)">TOUCH</button>
             <button class="btn btn-sub" onclick="resetTimer('timer1')">CLEAR</button>
         </div>
-    </div>
 
-    <!-- Area 02 -->
-    <div class="timer-card" id="card-timer2">
-        <div class="label-row">
-            <div class="area-label"><span>AREA 02</span></div>
-            <div style="font-size: 10px; color: #aab6c3;">RESET: 04:00 / 16:00</div>
-        </div>
-        <div class="time-display" id="timer2">03:00:00</div>
-        <div class="status-badge" id="status-timer2">READY</div>
-        <div class="button-group">
-            <button class="btn btn-main" onclick="startTimer('timer2', 3)">EXECUTE</button>
+        <!-- Area 02 -->
+        <div class="timer-card" id="card-timer2">
+            <div class="area-tag">AREA 02</div>
+            <div class="time-display" id="timer2">03:00:00</div>
+            <div class="status-badge" id="status-timer2">READY</div>
+            <button class="btn btn-main" onclick="startTimer('timer2', 3)">TOUCH</button>
             <button class="btn btn-sub" onclick="resetTimer('timer2')">CLEAR</button>
         </div>
+
+        <!-- Invitation 01 -->
+        <div class="timer-card invitation" id="card-inv1">
+            <div class="area-tag">TICKET 01</div>
+            <div class="time-display" id="inv1">20:00:00</div>
+            <div class="status-badge" id="status-inv1">READY</div>
+            <button class="btn btn-invite btn-main" onclick="startTimer('inv1', 20)">INVITE</button>
+            <button class="btn btn-sub" onclick="resetTimer('inv1')">CLEAR</button>
+        </div>
+
+        <!-- Invitation 02 -->
+        <div class="timer-card invitation" id="card-inv2">
+            <div class="area-tag">TICKET 02</div>
+            <div class="time-display" id="inv2">20:00:00</div>
+            <div class="status-badge" id="status-inv2">READY</div>
+            <button class="btn btn-invite btn-main" onclick="startTimer('inv2', 20)">INVITE</button>
+            <button class="btn btn-sub" onclick="resetTimer('inv2')">CLEAR</button>
+        </div>
     </div>
 
-    <!-- Invitation -->
-    <div class="timer-card invitation" id="card-ticket">
-        <div class="label-row">
-            <div class="area-label"><span>INVITATION</span></div>
-            <div style="font-size: 10px; color: #aab6c3;">COOLDOWN: 20H</div>
-        </div>
-        <div class="time-display" id="ticket">20:00:00</div>
-        <div class="status-badge" id="status-ticket">READY</div>
-        <div class="button-group">
-            <button class="btn btn-main" onclick="startTimer('ticket', 20)">INVITE</button>
-            <button class="btn btn-sub" onclick="resetTimer('ticket')">CLEAR</button>
-        </div>
-    </div>
-
-    <div style="text-align: center; font-size: 9px; color: #aab6c3; margin-top: 10px;">
-        CONFIDENTIAL - SCHALE ORGANIZATION
+    <div style="text-align: center; font-size: 8px; color: #cbd5e1; margin-top: 5px;">
+        CONFIDENTIAL - SCHALE ORGANIZATION CAFE UNIT
     </div>
 </div>
 
 <script>
-    const apiKey = ""; // Runtime provides the key
+    const apiKey = "";
     let audioCtx = null;
 
     function initApp() {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         document.getElementById('splash').style.opacity = '0';
         setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 500);
-        playBeep(660, 0.1, 0.1);
-        setTimeout(() => playBeep(880, 0.1, 0.1), 100);
-        fetchGreeting();
+        playBeep(880, 0.05, 0.15);
+        fetchBirthdayInfo();
     }
 
     async function callGemini(prompt, systemPrompt) {
@@ -352,47 +294,19 @@
         }
     }
 
-    async function fetchGreeting() {
-        const aiBox = document.getElementById('ai-response');
-        try {
-            const systemPrompt = "あなたは『ブルーアーカイブ』の連邦捜査局シャーレのAI秘書（アロナやプラナのような存在）です。先生（ユーザー）を励まし、カフェの管理を応援してください。短く1文で。";
-            const res = await callGemini("先生に今日の短い挨拶をしてください。", systemPrompt);
-            aiBox.innerText = res || "先生、お疲れ様です！今日もカフェの管理を頑張りましょう！";
-        } catch (e) {
-            aiBox.innerText = "通信エラー：アロナは現在お休み中のようです。";
-        }
-    }
-
-    async function askAiAdvice() {
-        const btn = document.getElementById('btn-ask-ai');
-        const aiBox = document.getElementById('ai-response');
-        const oldText = btn.innerHTML;
-        
-        btn.disabled = true;
-        btn.innerHTML = '<span class="loading-spinner"></span> 分析中...';
-
+    async function fetchBirthdayInfo() {
+        const infoBox = document.getElementById('birthday-info');
         const now = new Date();
-        const t1 = localStorage.getItem('timer1') ? new Date(parseInt(localStorage.getItem('timer1'))).toLocaleTimeString() : "未設定";
-        const t2 = localStorage.getItem('timer2') ? new Date(parseInt(localStorage.getItem('timer2'))).toLocaleTimeString() : "未設定";
-        const ticket = localStorage.getItem('ticket') ? new Date(parseInt(localStorage.getItem('ticket'))).toLocaleTimeString() : "未設定";
-
-        const prompt = `現在時刻: ${now.toLocaleTimeString()}
-1号店タイマー終了予定: ${t1}
-2号店タイマー終了予定: ${t2}
-招待券タイマー終了予定: ${ticket}
-
-上記の状況を踏まえ、カフェの絆経験値を最大化するための具体的な戦術アドバイスを、2、3文で親しみやすく提供してください。4時と16時の入れ替えを考慮してください。`;
-
-        const systemPrompt = "あなたはシャーレの戦術アドバイザーです。絆経験値を最大化するために、次にいつカフェを確認すべきか、招待券をいつ使うのが効率的かを論理的に、かつ可愛らしくアドバイスしてください。";
+        const dateStr = `${now.getMonth() + 1}月${now.getDate()}日`;
+        
+        const systemPrompt = "あなたはシャーレのAI秘書です。指定された日付が誕生日の『ブルーアーカイブ』の生徒を教え、先生にお祝いを促してください。該当者がいない場合は、先生を労う言葉をかけてください。回答は短く2文以内で。";
+        const prompt = `今日（${dateStr}）が誕生日の生徒は誰ですか？`;
 
         try {
-            const advice = await callGemini(prompt, systemPrompt);
-            aiBox.innerText = advice;
+            const res = await callGemini(prompt, systemPrompt);
+            infoBox.innerText = res || "今日の誕生日の生徒データは見当たりませんでした。先生、今日も一日頑張りましょう！";
         } catch (e) {
-            aiBox.innerText = "戦術分析に失敗しました。先生、今はご自身の判断にお任せします！";
-        } finally {
-            btn.disabled = false;
-            btn.innerHTML = oldText;
+            infoBox.innerText = "データ取得に失敗。通信環境を確認してください。";
         }
     }
 
@@ -415,26 +329,14 @@
         const bar = document.getElementById('notice-bar');
         bar.innerText = text;
         bar.style.display = 'block';
-        playBeep(440, 0.2, 1.0);
+        playBeep(440, 0.1, 0.5);
         setTimeout(() => { bar.style.display = 'none'; }, 5000);
-    }
-
-    function getNextReset() {
-        const now = new Date();
-        const r4 = new Date(now); r4.setHours(4,0,0,0);
-        const r16 = new Date(now); r16.setHours(16,0,0,0);
-        if (now < r4) return r4;
-        if (now < r16) return r16;
-        const nextDay4 = new Date(now);
-        nextDay4.setDate(now.getDate() + 1);
-        nextDay4.setHours(4,0,0,0);
-        return nextDay4;
     }
 
     function startTimer(id, hours) {
         const endTime = Date.now() + (hours * 60 * 60 * 1000);
         localStorage.setItem(id, endTime);
-        playBeep(1200, 0.05, 0.2);
+        playBeep(1100, 0.05, 0.2);
         update();
     }
 
@@ -445,58 +347,53 @@
 
     function update() {
         const now = new Date();
-        const nextReset = getNextReset();
         document.getElementById('current-date').innerText = 
             `${now.getFullYear()}.${(now.getMonth()+1).toString().padStart(2,'0')}.${now.getDate().toString().padStart(2,'0')}`;
 
-        const ids = ['timer1', 'timer2', 'ticket'];
+        const ids = ['timer1', 'timer2', 'inv1', 'inv2'];
         ids.forEach(id => {
             const savedEnd = localStorage.getItem(id);
             const display = document.getElementById(id);
             const status = document.getElementById('status-' + id);
-            const executeBtn = document.querySelector(`#card-${id} .btn-main`);
+            const btn = document.querySelector(`#card-${id} .btn-main`);
             
+            // 4:00/16:00 Reset Logic (Areas only)
             if (id.startsWith('timer') && savedEnd) {
-                const lastCheck = localStorage.getItem(id + '_reset_check') || 0;
-                const nowTime = now.getTime();
-                const checkR4 = new Date(now); checkR4.setHours(4,0,0,0);
-                const checkR16 = new Date(now); checkR16.setHours(16,0,0,0);
-                const hasPassedReset = (lastCheck < checkR4.getTime() && nowTime >= checkR4.getTime()) ||
-                                      (lastCheck < checkR16.getTime() && nowTime >= checkR16.getTime());
-                if (hasPassedReset) {
+                const lastCheck = localStorage.getItem(id + '_rck') || 0;
+                const nowT = now.getTime();
+                const r4 = new Date(now).setHours(4,0,0,0);
+                const r16 = new Date(now).setHours(16,0,0,0);
+                if ((lastCheck < r4 && nowT >= r4) || (lastCheck < r16 && nowT >= r16)) {
                     localStorage.removeItem(id);
                     showNotice("生徒が入れ替わりました！");
-                    localStorage.setItem(id + '_reset_check', nowTime);
+                    localStorage.setItem(id + '_rck', nowT);
                     return;
                 }
-                localStorage.setItem(id + '_reset_check', nowTime);
+                localStorage.setItem(id + '_rck', nowT);
             }
 
             if (!savedEnd) {
-                display.innerText = (id === 'ticket') ? "20:00:00" : "03:00:00";
-                display.style.opacity = "0.3";
+                display.innerText = (id.startsWith('inv')) ? "20:00:00" : "03:00:00";
+                display.style.opacity = "0.2";
                 status.innerText = "READY";
-                executeBtn.disabled = false;
+                btn.disabled = false;
                 return;
             }
 
             display.style.opacity = "1";
-            let remaining = savedEnd - now.getTime();
-            if (remaining <= 0) {
-                if (remaining > -1500) {
-                    playBeep(880, 0.2, 0.5);
-                    setTimeout(() => playBeep(1100, 0.2, 0.5), 200);
-                }
+            let rem = savedEnd - now.getTime();
+            if (rem <= 0) {
+                if (rem > -1500) playBeep(900, 0.1, 0.5);
                 display.innerText = "00:00:00";
                 status.innerText = "COMPLETE";
-                executeBtn.disabled = false;
+                btn.disabled = false;
             } else {
-                const h = Math.floor(remaining / 3600000).toString().padStart(2, '0');
-                const m = Math.floor((remaining % 3600000) / 60000).toString().padStart(2, '0');
-                const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0');
+                const h = Math.floor(rem / 3600000).toString().padStart(2, '0');
+                const m = Math.floor((rem % 3600000) / 60000).toString().padStart(2, '0');
+                const s = Math.floor((rem % 60000) / 1000).toString().padStart(2, '0');
                 display.innerText = `${h}:${m}:${s}`;
                 status.innerText = "IN PROGRESS";
-                executeBtn.disabled = true;
+                btn.disabled = true;
             }
         });
     }
