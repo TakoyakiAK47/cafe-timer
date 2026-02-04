@@ -3,211 +3,428 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAFE TOUCH MANAGER</title>
+    <title>CAFE TOUCH MANAGER | SCHALE</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,700;1,700&display=swap');
+
         :root {
-            --primary-blue: #00a3ff;
-            --bg-dark: #0f172a;
-            --glass-blue: rgba(0, 163, 255, 0.1);
-            --text-main: #e2e8f0;
-            --accent-white: #ffffff;
+            --ba-blue: #00bbff;
+            --ba-light-blue: #e6f7ff;
+            --ba-dark-blue: #123456;
+            --bg-white: #f4f7f9;
+            --glass: rgba(255, 255, 255, 0.8);
+            --schale-gray: #5b6d81;
+            --accent-orange: #ff9d00;
+            --ai-purple: #a855f7;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-white);
             background-image: 
-                radial-gradient(circle at 2px 2px, rgba(0, 163, 255, 0.05) 1px, transparent 0);
-            background-size: 40px 40px;
-            color: var(--text-main);
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+                linear-gradient(135deg, #ffffff 25%, transparent 25%), 
+                linear-gradient(225deg, #ffffff 25%, transparent 25%), 
+                linear-gradient(45deg, #ffffff 25%, transparent 25%), 
+                linear-gradient(315deg, #ffffff 25%, #f4f7f9 25%);
+            background-position: 40px 0, 40px 0, 0 0, 0 0;
+            background-size: 80px 80px;
+            background-repeat: repeat;
+            color: var(--schale-gray);
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px 0;
         }
 
-        .container {
-            width: 90%;
-            max-width: 500px;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--primary-blue);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 0 20px rgba(0, 163, 255, 0.2);
+        body::before {
+            content: "";
+            position: fixed;
+            top: -10%;
+            right: -10%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(0, 187, 255, 0.05) 0%, transparent 70%);
+            z-index: -1;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            color: var(--primary-blue);
+        .app-container {
+            width: 95%;
+            max-width: 450px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 2px solid #fff;
+            border-radius: 5px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 0 5px rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--ba-blue);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .header-title {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--ba-blue);
             text-transform: uppercase;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--primary-blue);
-            display: inline-block;
-            width: 100%;
+            letter-spacing: 1px;
         }
 
-        .timer-card {
-            background: var(--glass-blue);
-            border-left: 4px solid var(--primary-blue);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0 10px 10px 0;
+        .system-status {
+            font-size: 10px;
+            color: var(--ba-blue);
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        /* AI Section */
+        .ai-section {
+            background: rgba(168, 85, 247, 0.05);
+            border: 1px dashed var(--ai-purple);
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 20px;
             position: relative;
         }
 
-        .label {
-            font-size: 0.8rem;
-            color: var(--primary-blue);
+        .ai-title {
+            font-size: 11px;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            color: var(--ai-purple);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ai-content {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #6b21a8;
+        }
+
+        /* Timer Cards */
+        .timer-card {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 2px 2px 0px var(--ba-blue);
+            border: 1px solid #d1dee7;
+            padding: 15px;
+        }
+
+        .timer-card::after {
+            content: "";
+            position: absolute;
+            top: 0; right: 0;
+            width: 30px; height: 30px;
+            background: linear-gradient(225deg, var(--ba-blue) 45%, transparent 50%);
+            opacity: 0.1;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .area-label {
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
+            background: var(--ba-blue);
+            padding: 2px 10px;
+            transform: skewX(-15deg);
+        }
+
+        .area-label span {
+            display: inline-block;
+            transform: skewX(15deg);
         }
 
         .time-display {
-            font-size: 2.5rem;
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            text-shadow: 0 0 10px var(--primary-blue);
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2.8rem;
+            color: var(--ba-dark-blue);
+            text-align: center;
+            margin: 10px 0;
+            font-variant-numeric: tabular-nums;
         }
 
-        .controls {
+        .status-badge {
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--ba-blue);
+            height: 18px;
+            margin-bottom: 10px;
+        }
+
+        .button-group {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
         }
 
-        button {
-            background: transparent;
-            border: 1px solid var(--primary-blue);
-            color: var(--primary-blue);
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: bold;
+        .btn {
             flex: 1;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
         }
 
-        button:hover {
-            background: var(--primary-blue);
-            color: var(--bg-dark);
-        }
+        .btn-main { background: var(--ba-blue); color: white; }
+        .btn-main:hover { background: var(--ba-dark-blue); transform: translateY(-2px); }
+        .btn-sub { background: #eef2f5; color: var(--schale-gray); }
+        .btn-ai { background: var(--ai-purple); color: white; margin-top: 10px; clip-path: none; border-radius: 4px; }
+        .btn-ai:hover { opacity: 0.9; }
 
-        button:disabled {
-            border-color: #475569;
-            color: #475569;
-            cursor: not-allowed;
-        }
+        .btn:disabled { background: #d1dee7; opacity: 0.6; cursor: not-allowed; }
 
-        .status-msg {
-            font-size: 0.75rem;
-            margin-top: 5px;
-            height: 1rem;
-            color: #94a3b8;
-        }
+        .invitation { border-bottom: 4px solid var(--accent-orange); box-shadow: 2px 2px 0px var(--accent-orange); }
+        .invitation .area-label { background: var(--accent-orange); }
+        .invitation .time-display { color: var(--accent-orange); }
 
-        .invitation {
-            border-left-color: #f59e0b;
-        }
-        .invitation .label, .invitation .time-display {
-            color: #f59e0b;
-            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-        }
-        .invitation button {
-            border-color: #f59e0b;
-            color: #f59e0b;
-        }
-        .invitation button:hover {
-            background: #f59e0b;
-            color: var(--bg-dark);
-        }
-
-        #audio-init {
+        #splash {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            cursor: pointer;
+            z-index: 999;
+            transition: 0.5s;
         }
+
+        #notice-bar {
+            position: fixed;
+            top: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--ba-dark-blue); color: white;
+            padding: 10px 30px; border-radius: 50px;
+            font-size: 14px; font-weight: bold; z-index: 1000;
+            display: none; animation: slideDown 0.3s forwards;
+        }
+
+        @keyframes slideDown { from { top: -50px; } to { top: 20px; } }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 12px; height: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 5px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div id="audio-init">
+<div id="splash" onclick="initApp()">
     <div style="text-align: center;">
-        <p style="color: var(--primary-blue); font-size: 1.2rem;">SYSTEM START</p>
-        <p>画面をタップしてシステムを起動してください</p>
+        <div style="font-family: 'Exo 2', sans-serif; font-size: 2rem; color: var(--ba-blue);">SCHALE</div>
+        <div style="font-size: 10px; letter-spacing: 2px; color: var(--schale-gray);">TOUCH TO BOOT SYSTEM</div>
     </div>
 </div>
 
-<div class="container">
-    <h1>Cafe Manager</h1>
+<div id="notice-bar"></div>
 
-    <div class="timer-card">
-        <div class="label">CAFE AREA 01</div>
-        <div id="timer1" class="time-display">00:00:00</div>
-        <div class="controls">
-            <button onclick="startTimer('timer1', 3)">TOUCH</button>
-            <button onclick="resetTimer('timer1')">CLEAR</button>
+<div class="app-container">
+    <div class="header">
+        <div class="header-title">Cafe Touch Manager</div>
+        <div class="system-status">
+            STATUS: ONLINE<br>
+            <span id="current-date">0000.00.00</span>
         </div>
-        <div id="msg-timer1" class="status-msg"></div>
     </div>
 
-    <div class="timer-card">
-        <div class="label">CAFE AREA 02</div>
-        <div id="timer2" class="time-display">00:00:00</div>
-        <div class="controls">
-            <button onclick="startTimer('timer2', 3)">TOUCH</button>
-            <button onclick="resetTimer('timer2')">CLEAR</button>
-        </div>
-        <div id="msg-timer2" class="status-msg"></div>
+    <!-- AI Advisor -->
+    <div class="ai-section">
+        <div class="ai-title">✨ AI戦術アドバイザー</div>
+        <div id="ai-response" class="ai-content">システム待機中... 今日の戦術を分析しましょう。</div>
+        <button class="btn btn-ai" id="btn-ask-ai" onclick="askAiAdvice()">
+            ✨ 戦術プランを生成
+        </button>
     </div>
 
-    <div class="timer-card invitation">
-        <div class="label">INVITATION TICKET</div>
-        <div id="ticket" class="time-display">00:00:00</div>
-        <div class="controls">
-            <button onclick="startTimer('ticket', 20)">USE TICKET</button>
-            <button onclick="resetTimer('ticket')">CLEAR</button>
+    <!-- Area 01 -->
+    <div class="timer-card" id="card-timer1">
+        <div class="label-row">
+            <div class="area-label"><span>AREA 01</span></div>
+            <div style="font-size: 10px; color: #aab6c3;">RESET: 04:00 / 16:00</div>
         </div>
-        <div id="msg-ticket" class="status-msg"></div>
+        <div class="time-display" id="timer1">03:00:00</div>
+        <div class="status-badge" id="status-timer1">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('timer1', 3)">EXECUTE</button>
+            <button class="btn btn-sub" onclick="resetTimer('timer1')">CLEAR</button>
+        </div>
+    </div>
+
+    <!-- Area 02 -->
+    <div class="timer-card" id="card-timer2">
+        <div class="label-row">
+            <div class="area-label"><span>AREA 02</span></div>
+            <div style="font-size: 10px; color: #aab6c3;">RESET: 04:00 / 16:00</div>
+        </div>
+        <div class="time-display" id="timer2">03:00:00</div>
+        <div class="status-badge" id="status-timer2">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('timer2', 3)">EXECUTE</button>
+            <button class="btn btn-sub" onclick="resetTimer('timer2')">CLEAR</button>
+        </div>
+    </div>
+
+    <!-- Invitation -->
+    <div class="timer-card invitation" id="card-ticket">
+        <div class="label-row">
+            <div class="area-label"><span>INVITATION</span></div>
+            <div style="font-size: 10px; color: #aab6c3;">COOLDOWN: 20H</div>
+        </div>
+        <div class="time-display" id="ticket">20:00:00</div>
+        <div class="status-badge" id="status-ticket">READY</div>
+        <div class="button-group">
+            <button class="btn btn-main" onclick="startTimer('ticket', 20)">INVITE</button>
+            <button class="btn btn-sub" onclick="resetTimer('ticket')">CLEAR</button>
+        </div>
+    </div>
+
+    <div style="text-align: center; font-size: 9px; color: #aab6c3; margin-top: 10px;">
+        CONFIDENTIAL - SCHALE ORGANIZATION
     </div>
 </div>
 
 <script>
+    const apiKey = ""; // Runtime provides the key
     let audioCtx = null;
 
-    // 音を鳴らす関数
-    function playBeep() {
+    function initApp() {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        document.getElementById('splash').style.opacity = '0';
+        setTimeout(() => { document.getElementById('splash').style.display = 'none'; }, 500);
+        playBeep(660, 0.1, 0.1);
+        setTimeout(() => playBeep(880, 0.1, 0.1), 100);
+        fetchGreeting();
+    }
+
+    async function callGemini(prompt, systemPrompt) {
+        let delay = 1000;
+        for (let i = 0; i < 5; i++) {
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+                if (!response.ok) throw new Error('API Error');
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text;
+            } catch (err) {
+                if (i === 4) throw err;
+                await new Promise(r => setTimeout(r, delay));
+                delay *= 2;
+            }
+        }
+    }
+
+    async function fetchGreeting() {
+        const aiBox = document.getElementById('ai-response');
+        try {
+            const systemPrompt = "あなたは『ブルーアーカイブ』の連邦捜査局シャーレのAI秘書（アロナやプラナのような存在）です。先生（ユーザー）を励まし、カフェの管理を応援してください。短く1文で。";
+            const res = await callGemini("先生に今日の短い挨拶をしてください。", systemPrompt);
+            aiBox.innerText = res || "先生、お疲れ様です！今日もカフェの管理を頑張りましょう！";
+        } catch (e) {
+            aiBox.innerText = "通信エラー：アロナは現在お休み中のようです。";
+        }
+    }
+
+    async function askAiAdvice() {
+        const btn = document.getElementById('btn-ask-ai');
+        const aiBox = document.getElementById('ai-response');
+        const oldText = btn.innerHTML;
+        
+        btn.disabled = true;
+        btn.innerHTML = '<span class="loading-spinner"></span> 分析中...';
+
+        const now = new Date();
+        const t1 = localStorage.getItem('timer1') ? new Date(parseInt(localStorage.getItem('timer1'))).toLocaleTimeString() : "未設定";
+        const t2 = localStorage.getItem('timer2') ? new Date(parseInt(localStorage.getItem('timer2'))).toLocaleTimeString() : "未設定";
+        const ticket = localStorage.getItem('ticket') ? new Date(parseInt(localStorage.getItem('ticket'))).toLocaleTimeString() : "未設定";
+
+        const prompt = `現在時刻: ${now.toLocaleTimeString()}
+1号店タイマー終了予定: ${t1}
+2号店タイマー終了予定: ${t2}
+招待券タイマー終了予定: ${ticket}
+
+上記の状況を踏まえ、カフェの絆経験値を最大化するための具体的な戦術アドバイスを、2、3文で親しみやすく提供してください。4時と16時の入れ替えを考慮してください。`;
+
+        const systemPrompt = "あなたはシャーレの戦術アドバイザーです。絆経験値を最大化するために、次にいつカフェを確認すべきか、招待券をいつ使うのが効率的かを論理的に、かつ可愛らしくアドバイスしてください。";
+
+        try {
+            const advice = await callGemini(prompt, systemPrompt);
+            aiBox.innerText = advice;
+        } catch (e) {
+            aiBox.innerText = "戦術分析に失敗しました。先生、今はご自身の判断にお任せします！";
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = oldText;
+        }
+    }
+
+    function playBeep(freq = 880, vol = 0.1, duration = 0.5) {
         if (!audioCtx) return;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         gain.gain.setValueAtTime(0, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+        gain.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.5);
+        osc.stop(audioCtx.currentTime + duration);
     }
 
-    // 次のリセット時刻(4時/16時)を取得
+    function showNotice(text) {
+        const bar = document.getElementById('notice-bar');
+        bar.innerText = text;
+        bar.style.display = 'block';
+        playBeep(440, 0.2, 1.0);
+        setTimeout(() => { bar.style.display = 'none'; }, 5000);
+    }
+
     function getNextReset() {
         const now = new Date();
         const r4 = new Date(now); r4.setHours(4,0,0,0);
         const r16 = new Date(now); r16.setHours(16,0,0,0);
-        
         if (now < r4) return r4;
         if (now < r16) return r16;
-        
         const nextDay4 = new Date(now);
         nextDay4.setDate(now.getDate() + 1);
         nextDay4.setHours(4,0,0,0);
@@ -217,63 +434,74 @@
     function startTimer(id, hours) {
         const endTime = Date.now() + (hours * 60 * 60 * 1000);
         localStorage.setItem(id, endTime);
+        playBeep(1200, 0.05, 0.2);
         update();
     }
 
     function resetTimer(id) {
         localStorage.removeItem(id);
-        document.getElementById('msg-' + id).innerText = "";
         update();
     }
 
     function update() {
-        const now = Date.now();
+        const now = new Date();
         const nextReset = getNextReset();
-        const ids = ['timer1', 'timer2', 'ticket'];
+        document.getElementById('current-date').innerText = 
+            `${now.getFullYear()}.${(now.getMonth()+1).toString().padStart(2,'0')}.${now.getDate().toString().padStart(2,'0')}`;
 
+        const ids = ['timer1', 'timer2', 'ticket'];
         ids.forEach(id => {
             const savedEnd = localStorage.getItem(id);
             const display = document.getElementById(id);
-            const msg = document.getElementById('msg-' + id);
+            const status = document.getElementById('status-' + id);
+            const executeBtn = document.querySelector(`#card-${id} .btn-main`);
             
+            if (id.startsWith('timer') && savedEnd) {
+                const lastCheck = localStorage.getItem(id + '_reset_check') || 0;
+                const nowTime = now.getTime();
+                const checkR4 = new Date(now); checkR4.setHours(4,0,0,0);
+                const checkR16 = new Date(now); checkR16.setHours(16,0,0,0);
+                const hasPassedReset = (lastCheck < checkR4.getTime() && nowTime >= checkR4.getTime()) ||
+                                      (lastCheck < checkR16.getTime() && nowTime >= checkR16.getTime());
+                if (hasPassedReset) {
+                    localStorage.removeItem(id);
+                    showNotice("生徒が入れ替わりました！");
+                    localStorage.setItem(id + '_reset_check', nowTime);
+                    return;
+                }
+                localStorage.setItem(id + '_reset_check', nowTime);
+            }
+
             if (!savedEnd) {
-                display.innerText = "00:00:00";
+                display.innerText = (id === 'ticket') ? "20:00:00" : "03:00:00";
+                display.style.opacity = "0.3";
+                status.innerText = "READY";
+                executeBtn.disabled = false;
                 return;
             }
 
-            let remaining = savedEnd - now;
-
-            // 1, 2号店のみ4時/16時のリセット判定
-            if (id.startsWith('timer')) {
-                if (now >= nextReset.getTime() - 1000 && now <= nextReset.getTime() + 1000) {
-                    localStorage.removeItem(id);
-                    alert("生徒が入れ替わりました！");
-                    return;
-                }
-            }
-
+            display.style.opacity = "1";
+            let remaining = savedEnd - now.getTime();
             if (remaining <= 0) {
-                if (remaining > -2000) playBeep(); // 終了した瞬間に1回鳴らす
-                display.innerText = "COMPLETE";
-                localStorage.removeItem(id);
-                msg.innerText = "タッチ可能です";
+                if (remaining > -1500) {
+                    playBeep(880, 0.2, 0.5);
+                    setTimeout(() => playBeep(1100, 0.2, 0.5), 200);
+                }
+                display.innerText = "00:00:00";
+                status.innerText = "COMPLETE";
+                executeBtn.disabled = false;
             } else {
                 const h = Math.floor(remaining / 3600000).toString().padStart(2, '0');
                 const m = Math.floor((remaining % 3600000) / 60000).toString().padStart(2, '0');
                 const s = Math.floor((remaining % 60000) / 1000).toString().padStart(2, '0');
                 display.innerText = `${h}:${m}:${s}`;
+                status.innerText = "IN PROGRESS";
+                executeBtn.disabled = true;
             }
         });
     }
 
-    // 初回起動処理
-    document.getElementById('audio-init').addEventListener('click', function() {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        this.style.display = 'none';
-    });
-
     setInterval(update, 1000);
-    update();
 </script>
 </body>
 </html>
