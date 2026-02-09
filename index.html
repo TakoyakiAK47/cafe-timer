@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAFE TOUCH MANAGER</title>
+    <title>BLUE ARCHIVE<br>CAFE TOUCH MANAGER</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,700;1,700&display=swap');
 
@@ -213,7 +213,7 @@
 
 <div id="splash" onclick="initApp()">
     <div style="text-align: center;">
-        <div style="font-family: 'Exo 2', sans-serif; font-size: 2rem; color: var(--ba-blue);">CAFE TOUCH MANAGER</div>
+        <div style="font-family: 'Exo 2', sans-serif; font-size: 2rem; color: var(--ba-blue);">BLUE ARCHIVE<br>CAFE TIMER</div>
         <div style="font-size: 10px; letter-spacing: 2px; color: var(--schale-gray);">TOUCH TO START</div>
     </div>
 </div>
@@ -222,11 +222,8 @@
 
 <div class="app-container">
     <div class="header">
-        <div class="header-title">Cafe Touch Manager</div>
-        <div class="system-status">
-            STATUS: ONLINE<br>
-            <span id="current-date">0000.00.00</span>
-        </div>
+        <div class="header-title">BLUE ARCHIVE<br>CAFE TIMER</div>
+        <div class="header-sub" onclick="location.href='https://x.com/TakoyakiAK47'" style="cursor:pointer;">お問い合わせはこちらから</div>
     </div>
 
     <!-- Birthday Section -->
@@ -294,7 +291,7 @@
     </div>
 
     <div style="text-align: center; font-size: 9px; color: #aab6c3; margin-top: 10px;">
-        @ 2026 CAFE TOUCH MANAGER
+        @ 2026 Blue Archive Cafe Timer
     </div>
 </div>
 
@@ -344,9 +341,9 @@
         
         const students = BIRTHDAY_DB[key];
         if (students) {
-            infoBox.innerHTML = `本日はおめでたい日です、先生！<span class="birthday-name">${students}</span>の誕生日をお祝いしましょう！`;
+            infoBox.innerHTML = `<span class="birthday-name">${students}</span>お誕生日おめでとう！`;
         } else {
-            infoBox.innerText = "今日誕生日の生徒はいません。先生、今日も一日お疲れ様です！";
+            infoBox.innerText = "今日誕生日の生徒はいません。";
         }
     }
 
@@ -457,3 +454,4 @@
 </script>
 </body>
 </html>
+
